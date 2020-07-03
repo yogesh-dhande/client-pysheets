@@ -42,9 +42,11 @@
 
 <script>
     import {mapActions} from "vuex";
+    import {inputMixin} from "../mixins/inputMixin";
 
     export default {
         name: "multi-choice",
+        mixins: [inputMixin],
         props: {
             id: {
                 type: String
@@ -61,7 +63,7 @@
         },
         data() {
             return {
-                selectedList: this.value,
+                selectedList: this.config.value,
                 searchTerm: '',
                 searchTermWidth: '',
                 lastTerm: '',
@@ -97,9 +99,9 @@
                 this.$nextTick().then(() => this.calcTextWidth())
             },
             selectedList(newList) {
-                this.value = newList
+                this.config.value = newList
                 this.$emit('input', newList)
-                this.updateValue(this.$props)
+                this.updateValue(this.config)
             }
         },
         methods: {

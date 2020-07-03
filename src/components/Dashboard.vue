@@ -1,10 +1,10 @@
 <template>
     <b-container id="dashboard" style="padding: 4px; margin: 16px">
         <b-row>
-            <b-col class="col1">
+            <b-col cols="4">
                 <ui-group v-bind="side" :key="side.key"></ui-group>
             </b-col>
-            <b-col class="col2">
+            <b-col>
                 <ui-group v-bind="main" :key="main.key"></ui-group>
             </b-col>
         </b-row>

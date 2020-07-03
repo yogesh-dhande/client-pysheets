@@ -8,8 +8,8 @@
         <b-form-input
                 class="form-input-element"
                 type="text"
-                v-model="value"
-                @change="updateValue(value)"
+                v-model="config.value"
+                @change="updateValue(config)"
         ></b-form-input>
     </b-form-group>
 </template>
@@ -20,15 +20,16 @@
     export default {
         name: "ui-string",
         mixins: [inputMixin],
-        mounted() {
-            Object.keys(this.value).forEach(
-                prop => {
-                    this.$watch('value.' + prop, function (newValue, oldValue) {
-                        console.log(prop + ' changed from ' + oldValue + ' to ' + newValue + '!');
-                    }, {deep: true})
-                }
-            )
-
+        props: {
+            id: {
+                type: String
+            },
+            label: {
+                type: String
+            },
+            value: {
+                type: Boolean
+            },
         }
     };
 </script>

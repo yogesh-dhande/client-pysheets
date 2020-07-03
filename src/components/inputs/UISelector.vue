@@ -8,17 +8,19 @@
         <b-form-select
                 class="form-input-element"
                 :options="options"
-                v-model="localValue"
-                @change="updateValue($props)"
+                v-model="config.value"
+                @change="updateValue(config)"
         ></b-form-select>
     </b-form-group>
 </template>
 
 <script>
     import {mapActions} from "vuex";
+    import {inputMixin} from "../mixins/inputMixin";
 
     export default {
         name: "ui-selector",
+        mixins: [inputMixin],
         props: {
             id: {
                 type: String
@@ -32,11 +34,6 @@
             options: {
                 type: Array
             },
-        },
-        data() {
-            return {
-                localValue: this.value
-            };
         },
         methods: {
             ...mapActions(["updateValue"]),

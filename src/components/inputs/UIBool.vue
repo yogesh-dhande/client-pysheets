@@ -14,10 +14,11 @@
 
 <script>
 
-    import {mapActions} from "vuex";
+    import {inputMixin} from "../mixins/inputMixin";
 
     export default {
         name: "ui-bool",
+        mixins: [inputMixin],
         props: {
             id: {
                 type: String
@@ -56,10 +57,9 @@
             }
         },
         methods: {
-            ...mapActions(["updateValue"]),
             toggle() {
-                this.value = !this.value
-                this.updateValue(this.$props)
+                this.config.value = !this.config.value
+                this.updateValue(this.config)
             }
         }
     };

@@ -17,9 +17,11 @@
 
 <script>
     import {mapActions} from "vuex";
+    import {inputMixin} from "../mixins/inputMixin";
 
     export default {
         name: 'drop-down',
+        mixins: [inputMixin],
         props: {
             id: {
                 type: String
@@ -43,10 +45,10 @@
         methods: {
             ...mapActions(['dispatchAction']),
             selectOption(item) {
-                this.value = item.value
+                this.config.value = item.value
                 this.dispatchAction({
                     event: 'menu item click',
-                    value: this.$props
+                    value: this.config
                 })
             }
         },
