@@ -7,8 +7,6 @@ let establishRemoteSocket = true
 
 Vue.use(Vuex)
 
-const Bokeh = window.Bokeh
-
 export function buildStore() {
     let socket;
     if (establishRemoteSocket) {
@@ -17,7 +15,6 @@ export function buildStore() {
 
     let store = new Vuex.Store({
         state: {
-            // bokehSession: Bokeh.embed.pull_session('http://localhost:5006/bkapp'),
             session: {
                 script: '',
                 id: ''
