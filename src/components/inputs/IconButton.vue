@@ -7,15 +7,14 @@
               :block="block"
     >
         <i :class="localIcon" aria-hidden="true"></i>
-        {{label}}
     </b-button>
 </template>
 
 <script>
-    import {mapActions, mapGetters, mapState} from "vuex";
+    import {mapActions, mapState} from "vuex";
 
     export default {
-        name: 'ui-button',
+        name: 'icon-button',
         props: {
             id: {
                 type: String
@@ -41,9 +40,8 @@
         },
         computed: {
             ...mapState(['app']),
-            ...mapGetters(['getConfig']),
             localIcon () {
-                return "fa fa-" + this.getConfig(this.icon.id).icon_name
+                return "fa fa-" + this.app.models[this.icon.id].icon_name
             }
         }
     };

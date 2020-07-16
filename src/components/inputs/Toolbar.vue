@@ -1,10 +1,10 @@
 <template>
     <div :id="id" class="toolbar toolbar-background">
         <div @mouseover="mouseover" @mouseleave="mouseleave">
-            <span v-show="!showButtons">{{label}}</span>
+            <span v-show="!showButtons">{{name}}</span>
             <b-button-group v-show="showButtons">
                 <component :is="tool.component"
-                           v-for="tool in children"
+                           v-for="tool in localChildren"
                            :id="tool.id"
                            :key="tool.id"
                            v-bind="tool"
@@ -17,8 +17,9 @@
 </template>
 
 <script>
-    import UIButton from "./UIButton";
     import UIBool from "./UIBool";
+    import {mapGetters, mapState} from "vuex";
+    import IconButton from "./IconButton";
 
     export default {
         name: 'toolbar',
@@ -26,7 +27,7 @@
             id: {
                 type: String
             },
-            label: {
+            name: {
                 type: String
             },
             children: {
@@ -34,7 +35,7 @@
             }
         },
         components: {
-            'ui-button': UIButton,
+            "icon-button": IconButton,
             'ui-bool': UIBool
         },
         data() {
@@ -48,6 +49,19 @@
             },
             mouseleave: function () {
                 this.showButtons = false
+            }
+        },
+        computed: {
+            ...mapState(['app']),
+            ...mapGetters(['getConfig']),
+            localChildren() {
+                return this.children.map(child => {
+                    let config = this.getConfig(child.id)
+                    config.tooltip = config.label
+                    config.label = ""
+                    config.block = false
+                    return config
+                })
             }
         }
     }

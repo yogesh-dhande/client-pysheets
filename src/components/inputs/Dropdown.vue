@@ -2,15 +2,15 @@
     <b-dropdown type="submit"
                 :id="id"
                 :text="label"
-                :variant="variant"
+                :variant="button_type"
                 v-b-tooltip.hover :title="tooltip"
                 block
     >
         <b-dropdown-item-button
-                v-for="item in options"
+                v-for="item in menu"
                 @click="selectOption(item)"
-                :key="item.value">
-            {{item.text}}
+                :key="item">
+            {{item}}
         </b-dropdown-item-button>
     </b-dropdown>
 </template>
@@ -32,20 +32,20 @@
             value: {
                 type: String
             },
-            options: {
+            menu: {
                 type: Array
             },
             tooltip: {
                 type: String
             },
-            variant: {
+            button_type: {
                 type: String
             }
         },
         methods: {
             ...mapActions(['dispatchAction']),
             selectOption(item) {
-                this.config.value = item.value
+                this.config.value = item
                 this.dispatchAction({
                     event: 'menu item click',
                     value: this.config

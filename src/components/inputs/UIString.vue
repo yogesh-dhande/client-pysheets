@@ -28,7 +28,7 @@
                 type: String
             },
             value: {
-                type: Boolean
+                type: String
             },
         }
     };

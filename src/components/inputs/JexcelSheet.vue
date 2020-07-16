@@ -15,9 +15,22 @@
             id: {
                 type: String
             },
-            value: {
-                type: String
+            source: {
+                type: Object
             },
+            view: {
+                type: Object
+            },
+            columns: {
+                type: Array
+            },
+            height: {
+                type: Number
+            },
+            sortable: {
+                type: Boolean
+            },
+
         },
         data() {
             return {

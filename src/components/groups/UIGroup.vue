@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import {mapState} from "vuex";
+    import {mapGetters, mapState} from "vuex";
 
     export default {
         name: "ui-group",
@@ -36,8 +36,12 @@
         },
         computed: {
             ...mapState(['app']),
+            ...mapGetters(['getConfig']),
             localChildren() {
-                return this.children.map(child => this.app.models[child.id])
+                return this.children.map(child => {
+                    // console.log(this.getConfig(child.id))
+                    return this.getConfig(child.id)
+                })
             }
         }
     }

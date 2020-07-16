@@ -14,9 +14,6 @@
             },
             script: {
                 type: String
-            },
-            key: {
-                type: String
             }
         },
         mounted() {

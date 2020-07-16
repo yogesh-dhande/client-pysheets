@@ -7,6 +7,8 @@ let establishRemoteSocket = true
 
 Vue.use(Vuex)
 
+const Bokeh = window.Bokeh
+
 export function buildStore() {
     let socket;
     if (establishRemoteSocket) {
@@ -15,6 +17,7 @@ export function buildStore() {
 
     let store = new Vuex.Store({
         state: {
+            // bokehSession: Bokeh.embed.pull_session('http://localhost:5006/bkapp'),
             session: {
                 script: '',
                 id: ''
@@ -30,6 +33,10 @@ export function buildStore() {
             userProfile: {},
             posts: [],
             hiddenPosts: []
+        },
+        getters: {
+            getConfig: (state) =>
+                id => state.app.models[id]
         },
         actions: {
             updateValue({commit, state}, payload) {  // eslint-disable-line no-unused-vars
@@ -48,6 +55,9 @@ export function buildStore() {
             },
             setModel({commit}, payload) {
                 commit('setModel', payload)
+            },
+            setModels({commit}, payload) {
+                commit('setModels', payload)
             },
             setSession({commit}, payload) {
                 commit('setSession', payload)
@@ -121,6 +131,9 @@ export function buildStore() {
                 console.log(payload)
                 Vue.set(state.app.models, payload.id, payload)
             },
+            setModels(state, payload) {
+                state.app.models = Object.assign({}, state.app.models, payload)
+            },
             setSession(state, payload) {
                 console.log(payload)
                 state.session = payload
@@ -172,6 +185,10 @@ export function buildStore() {
         socket.on('set model', function (json) {
             console.log('setting model');
             store.dispatch('setModel', json)
+        })
+        socket.on('set models', function (json) {
+            console.log('setting models');
+            store.dispatch('setModels', json)
         })
     }
 

@@ -8,13 +8,14 @@
             :id="id"
     >
         <i :class="localIcon" aria-hidden="true"></i>
-        {{label}}
+        {{config.label}}
     </b-button>
 </template>
 
 <script>
 
     import {inputMixin} from "../mixins/inputMixin";
+    import {mapGetters, mapState} from "vuex";
 
     export default {
         name: "ui-bool",
@@ -30,10 +31,10 @@
                 type: Boolean
             },
             icon: {
-                type: String
+                type: Object
             },
             inactive_icon: {
-                type: String
+                type: Object
             },
             tooltip: {
                 type: String
@@ -43,17 +44,19 @@
             }
         },
         computed: {
+            ...mapState(['app']),
+            ...mapGetters(['getConfig']),
             variant() {
                 return this.value ? "success" : "secondary"
             },
             activeIcon() {
-                return this.icon ? this.icon : "fa fa-check"
+                return this.icon ? "fa fa-" + this.getConfig(this.icon.id).icon_name : "fa fa-check"
             },
             inactiveIcon() {
-                return this.inactive_icon ? this.inactive_icon : "fa fa-times"
+                return this.inactive_icon ? "fa fa-" + this.getConfig(this.inactive_icon.id).icon_name : "fa fa-times"
             },
             localIcon() {
-                return this.value ? this.activeIcon : this.inactiveIcon
+                return this.config.value ? this.activeIcon : this.inactiveIcon
             }
         },
         methods: {
