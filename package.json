@@ -9,9 +9,11 @@
     "lint": "vue-cli-service lint",
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
-    "rebuild": "npm run clean && npm install && npm run build"
+    "rebuild": "npm run clean && npm install && npm run build",
+    "postinstall": "mkdir bokeh && cd bokeh && git init && git remote add -f origin https://github.com/yogesh-dhande/bokeh.git && git pull --depth=1 origin master && cd .. && npm i ./bokeh/bokehjs"
   },
   "dependencies": {
+    "@bokeh/bokehjs": "file:bokeh/bokehjs",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
