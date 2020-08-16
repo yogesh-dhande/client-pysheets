@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as bokeh from '@bokeh/bokehjs'
 
-console.log(bokeh)
 
 const fb = require('./firebaseConfig.js')
 let io = require('socket.io-client')
@@ -18,10 +17,7 @@ export function buildStore() {
 
     let store = new Vuex.Store({
         state: {
-            session: {
-                script: '',
-                id: ''
-            },
+            session: null,
             app: {
                 models: {},
                 layout: {
@@ -35,8 +31,7 @@ export function buildStore() {
             hiddenPosts: []
         },
         getters: {
-            getConfig: (state) =>
-                id => state.app.models[id]
+            getConfig: (state) => id => state.app.models[id],
         },
         actions: {
             updateValue({commit, state}, payload) {  // eslint-disable-line no-unused-vars
@@ -59,8 +54,9 @@ export function buildStore() {
             setModels({commit}, payload) {
                 commit('setModels', payload)
             },
-            setSession({commit}, payload) {
-                commit('setSession', payload)
+            setSession({commit}, token) {
+                bokeh.pull_session("ws://localhost:5006/bkapp/ws", token)
+                    .then(res => commit('setSession', res))
             },
             dispatchAction({commit, state}, payload) {  // eslint-disable-line no-unused-vars
                 payload.value.session_id = state.session.id
@@ -136,7 +132,13 @@ export function buildStore() {
             },
             setSession(state, payload) {
                 console.log(payload)
-                state.session = payload
+                Vue.set(state, "session", payload)
+                console.log(state.session.document.roots())
+                state.session.document.roots().forEach(
+                    root => {
+                        console.log(root)
+                        console.log(root.default_view.name)
+                })
             },
             setCurrentUser(state, val) {
                 state.currentUser = val
@@ -171,24 +173,9 @@ export function buildStore() {
         })
 
         socket.on('create app', function (json) {
-            store.dispatch('setSession', json)
-        })
-
-        socket.on('set controls', function (json) {
-            console.log('setting controls');
-            store.dispatch('setControls', json)
-        })
-        socket.on('set main', function (json) {
-            console.log('setting main');
-            store.dispatch('setMain', json)
-        })
-        socket.on('set model', function (json) {
-            console.log('setting model');
-            store.dispatch('setModel', json)
-        })
-        socket.on('set models', function (json) {
-            console.log('setting models');
-            store.dispatch('setModels', json)
+            // TODO show a loading symbol or something interesting
+            //  so that the page is not empty while waiting
+            store.dispatch('setSession', json.token)
         })
     }
 

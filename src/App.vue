@@ -14,10 +14,10 @@
     export default {
         name: 'App',
         components: {
-            'navigation': Navigation
+            'navigation': Navigation,
         },
         computed: {
-            ...mapState(['currentUser'])
+            ...mapState(['currentUser']),
         },
     }
 </script>
