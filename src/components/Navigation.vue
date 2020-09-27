@@ -1,11 +1,14 @@
 <template>
-    <b-navbar>
+    <b-navbar toggleable="lg" type="dark" variant="dark">
         <b-navbar-brand to="dashboard">Biokeh</b-navbar-brand>
-        <b-navbar-nav>
-            <b-nav-item to="dashboard">Dashboard</b-nav-item>
-            <b-nav-item to="settings">Settings</b-nav-item>
-            <b-nav-item @click="logout">Logout</b-nav-item>
-        </b-navbar-nav>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="ml-auto">
+                <b-nav-item to="dashboard">Dashboard</b-nav-item>
+                <b-nav-item to="settings">Settings</b-nav-item>
+                <b-nav-item @click="logout">Logout</b-nav-item>
+            </b-navbar-nav>
+        </b-collapse>
     </b-navbar>
 </template>
 

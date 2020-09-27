@@ -1,21 +1,20 @@
 <template>
-    <div class="container-fluid">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">
+    <div>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+            <b-navbar-brand class="navbar-brand" href="#">
                 <font-awesome-icon icon="seedling" size="lg"/>
-                Welcome to PySheets</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li v-show="user" class="nav-item">
-                        <a class="nav-link" @click="signoutButtonPressed">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                Welcome to PySheets
+            </b-navbar-brand>
+
+            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+            <b-collapse id="nav-collapse" is-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item v-show="user" @click="signoutButtonPressed">
+                        Logout
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
 
     </div>
 </template>
