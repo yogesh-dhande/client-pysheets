@@ -56,17 +56,17 @@
 <style scoped>
     .toolbar {
         border-radius: 10px;
-        margin: 16px 0;
+        margin: 4px 0;
         padding: 0;
         display: block;
         text-align: center;
-        line-height: 50px;
+        line-height: 40px;
         color: #fff;
         overflow: hidden;
     }
 
     .toolbar-background {
-        background-color: #007db9;
-        border-color: #007db9;
+        background-color: #0c1824;
+        border-color: #0c1824;
     }
 </style>
