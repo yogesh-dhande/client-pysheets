@@ -33,7 +33,8 @@
                          v-for="(row, index) in filteredSuggest"
                          :key="index"
                          @mousedown.prevent="addSelected(row.value || row)"
-                         @mouseover="activeVertical = index" v-html="hightlightWord(row)"></div>
+                         @mouseover="activeVertical = index" v-html="hightlightWord(row)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +58,10 @@
             options: {
                 type: Array
             },
+            allowInsertionOfNewKeys: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
@@ -80,7 +85,8 @@
                 const ex = RegExp(this.sanitizedTerm, 'i')
                 const filtered = this.suggestedList.filter(ele => ex.test(ele))
                 const label = `<strong><sup>+</sup> ${this.searchTerm}</strong>`
-                return filtered.length ? filtered : [{label, value: this.searchTerm}]
+                let newTerm = this.allowInsertionOfNewKeys? [{label, value: this.searchTerm}]: []
+                return filtered.length ? filtered : newTerm
             },
             suggestedList() {
                 return this.options
@@ -102,14 +108,14 @@
         methods: {
             addSelected(val) {
                 if (this.selectedList.includes(val)) return
-
+                if (!this.allowInsertionOfNewKeys && !this.options.includes(val)) return
                 this.selectedList.push(val)
                 this.searchTerm = ''
                 this.activeHorizontal = -1
             },
             addActive() {
                 const value = this.filteredSuggest[this.activeVertical]
-                if (value && this.showSuggestPanel) this.addSelected(value || value)
+                if (value && this.showSuggestPanel) this.addSelected(value.value)
             },
             removeSelected(index) {
                 this.selectedList.splice(index, 1)
