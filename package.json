@@ -11,7 +11,7 @@
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
     "build-bokeh": "cd bokeh/bokehjs && node make build && cd ../.. && npm i ./bokeh/bokehjs",
-    "postinstall": "mkdir bokeh && cd bokeh && git init && git remote add -f origin https://github.com/yogesh-dhande/bokeh.git && git pull --depth=1 origin pysheets_master && cd bokehjs && node make build && cd ../.. && npm i ./bokeh/bokehjs"
+    "postinstall": "mkdir bokeh && cd bokeh && git init && git remote add -f origin https://github.com/yogesh-dhande/bokeh.git && git pull --depth=1 origin master_bokehjs_integration && cd bokehjs && node make build && cd ../.. && npm i ./bokeh/bokehjs"
   },
   "dependencies": {
     "@bokeh/bokehjs": "file:bokeh/bokehjs",
