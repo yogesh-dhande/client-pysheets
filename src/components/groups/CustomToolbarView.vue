@@ -16,7 +16,7 @@
 
 <script>
     import Toolbar from "./../inputs/Toolbar"
-    import components from "../bokeh";
+    import components from "../bokeh_components";
 
     export default {
         name: "CustomToolbarView",

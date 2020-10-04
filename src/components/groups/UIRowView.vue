@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import components from "../bokeh"
+    import components from "../bokeh_components"
     import UIColumnView from "./UIColumnView";
     import CustomToolbarView from "./CustomToolbarView";
 

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import components from "../bokeh"
+    import components from "../bokeh_components"
     import UIRowView from "./UIRowView";
     import CustomToolbarView from "./CustomToolbarView";
 
