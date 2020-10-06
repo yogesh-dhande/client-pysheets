@@ -10,11 +10,10 @@
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
-    "build-bokeh": "cd bokeh/bokehjs && node make build && cd ../.. && npm i ./bokeh/bokehjs",
-    "postinstall": "mkdir bokeh && cd bokeh && git init && git remote add -f origin https://github.com/yogesh-dhande/bokeh.git && git pull --depth=1 origin master_bokehjs_integration && cd bokehjs && node make build && cd ../.. && npm i ./bokeh/bokehjs"
+    "build-bokeh": "(cd ../bokeh/bokehjs && node make build) && npm i ../bokeh/bokehjs",
   },
   "dependencies": {
-    "@bokeh/bokehjs": "file:bokeh/bokehjs",
+    "@bokeh/bokehjs": "file:../bokeh/bokehjs",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
@@ -22,7 +21,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "firebase": "^7.15.0",
-    "firebaseui": "^4.5.1",
+    "firebaseui": "^4.6.1",
     "jexcel-pro": "^5.6.5",
     "postscribe": "^2.0.8",
     "socket.io-client": "^2.3.0",
