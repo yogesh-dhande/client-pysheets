@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
-    "build-bokeh": "(cd ../bokeh/bokehjs && node make build) && npm i ../bokeh/bokehjs"
+    "postinstall": "npm i ../bokeh/bokehjs"
   },
   "dependencies": {
     "@bokeh/bokehjs": "file:../bokeh/bokehjs",
