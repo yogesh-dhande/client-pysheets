@@ -1,9 +1,10 @@
+import firebase from "firebase";
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
 import Settings from "./components/Settings";
-import firebase from "firebase";
+import TestComponents from "./components/TestComponents.vue";
 
 Vue.use(Router);
 
@@ -25,6 +26,14 @@ let router = new Router({
       component: Dashboard,
       meta: {
         requiresAuth: true,
+      },
+    },
+    {
+      path: "/test",
+      name: "Test",
+      component: TestComponents,
+      meta: {
+        requiresAuth: false,
       },
     },
     {

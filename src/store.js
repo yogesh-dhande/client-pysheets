@@ -1,6 +1,8 @@
+import * as bokeh from "@bokeh/bokehjs";
 import Vue from "vue";
 import Vuex from "vuex";
-import * as bokeh from "@bokeh/bokehjs";
+
+console.log(bokeh)
 
 const fb = require("./firebaseConfig.js");
 let io = require("socket.io-client");
